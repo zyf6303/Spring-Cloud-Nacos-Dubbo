@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: dubbo-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.106:8848
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}  #配置中心地址
+        file-extension: yaml  #文件后缀名     很根据本定文件名称拼接
+        extension-configs:  #扩展配置低
+          - dataId: ext-config-one.yaml    #extension-configs[n]  n越大优先级越高  始终低于组配置
+            group: DEFAULT_GROUP
+            refresh: true
+
+          - dataId: ext-config-two.yaml
+            group: DEFAULT_GROUP
+            refresh: true

@@ -3,6 +3,8 @@ package com.yf.controller;
 import com.yf.service1.api.Service1;
 import com.yf.service2.api.Service2;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
+
+    @Value("${common.name}")
+    String name;
+    @Value("${common.age}")
+    String age;
 
     @Reference
     Service1 service1;
@@ -30,5 +37,9 @@ public class TestController {
         //通过service1 调用service2
         return "调用来自： " + service1.getService1();
     }
-
+    @GetMapping("/ser")
+    public String getConfig(){
+        //通过service1 调用service2
+        return "配置来自中心： "+name+"|"+age;
+    }
 }
