@@ -1,0 +1,31 @@
+server:
+  port: 8998
+
+spring:
+
+  application:
+    name: dubbo-service1
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.106:8848
+  main:
+    allow-bean-definition-overriding: true
+dubbo:
+  #dubbo 链接nacos  注册地址
+  registry:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}
+  scan:
+    #扫描基准包
+    base-packages: com.yf.service1.impl
+
+  protocol:
+    #dubbo端口
+    port: 20881
+    #dubbo协议
+    name: dubbo
+  consumer:
+    check: false  #地董事是否坚持依赖服务
+  application:
+    qos-enable: false  #dubbo 服务是否开启

@@ -1,0 +1,26 @@
+server:
+  port: 8999
+
+spring:
+  application:
+    name: dubbo-service2
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.106:8848
+        cluster-name: DEFAULT #集群默认DEFAULT
+        #namespace: xxxxxxx   #命名空间  做隔离
+  main:
+    allow-bean-definition-overriding: true   #出现重名直接复写
+dubbo:
+  registry:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}
+  scan:
+    base-packages: com.yf.service2.api.impl
+  protocol:
+    name: dubbo
+    port: 20882
+  consumer:
+    check: false  #检查是否依赖服务
+  application:
+    qos-enable: false  #dubbo 服务是否开启
